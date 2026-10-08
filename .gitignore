@@ -1,0 +1,125 @@
+# ==============================================================================
+# ResumeMatch: .gitignore
+# Production Git Ignore Configuration for Python, Next.js, and Full-Stack AI
+# ==============================================================================
+
+# --- Operating System & Desktop Files ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# --- Environment Variables & Secrets (CRITICAL SECURITY) ---
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.pem
+*.key
+*.cert
+*.crt
+secrets.json
+credentials.json
+
+# --- Python & Backend ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Python Virtual Environments ---
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Python Testing, Linting & Coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# --- Node.js & Next.js Frontend ---
+node_modules/
+.next/
+out/
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# --- IDEs & Code Editors ---
+.vscode/
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~
+
+# --- Databases & Persistent Storage ---
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+postgres-data/
+pgdata/
+
+# --- Ephemeral Uploads & User Resumes (PII Protection) ---
+uploads/
+temp/
+tmp/
+scratch/
+*.pdf
+!data/evaluation/**/*.pdf
+!backend/tests/fixtures/**/*.pdf
+
+# --- AI/ML Model Caches & Large Weights ---
+models_cache/
+.cache/
+huggingface/
+torch/
+
+# --- Testing Artifacts (Playwright, Cypress) ---
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
