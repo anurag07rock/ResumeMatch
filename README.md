@@ -5,14 +5,14 @@
 ---
 
 ## ⚠️ Development Status
-**Current State**: **Phase 1: Environment & Repository Scaffolding (Active Development)**  
-*This repository is currently in foundational scaffolding and is not yet production-ready. Application features, database models, authentication, PDF parsing, and AI/ML matching will be implemented in planned upcoming phases.*
+**Current State**: **Phase 2: Database Foundation (Active Milestone)**  
+*The database foundation (SQLAlchemy 2.0 ORM models, pgvector type integration, Alembic migrations, session management, and repository layer) has been implemented. However, execution of live database migrations and integration tests is currently blocked pending Docker Desktop / PostgreSQL availability on the host machine.*
 
 ---
 
 ## 📖 Overview
 ResumeMatch is a full-stack, explainable AI platform designed to match candidate resumes with job descriptions. Unlike black-box screening systems or naive keyword matchers, ResumeMatch combines:
-- **Dense Semantic Embeddings** (`sentence-transformers/all-MiniLM-L6-v2`)
+- **Dense Semantic Embeddings** (`sentence-transformers/all-MiniLM-L6-v2`, 384 dimensions)
 - **Deterministic Skill Ontology Matching** (1,200+ canonical technical skills)
 - **Experience Timeline Verification** (Interval parsing and delta scoring)
 - **Education Hierarchy Classification**
@@ -20,105 +20,108 @@ ResumeMatch is a full-stack, explainable AI platform designed to match candidate
 
 ---
 
-## 🗄️ Database Architecture
-- **Primary Database**: **PostgreSQL + pgvector** (Primary storage for relational entities, foreign key constraints, and 384-dimensional vector embeddings).
-- **Local Development**: PostgreSQL, preferably run via **Docker Desktop** (or local PostgreSQL service).
-- **Production**: PostgreSQL 16 + `pgvector` extension.
-- **Optional Fallback**: SQLite exists strictly as an **optional, lightweight test/local development fallback** isolated cleanly behind the repository data-access layer.
+## 🗄️ Database Architecture & Requirements
+
+### Core Database Stack
+- **Engine**: **PostgreSQL 16** with **`pgvector`** extension.
+- **ORM / Driver**: **SQLAlchemy 2.x** with **`asyncpg`** async driver.
+- **Migrations**: **Alembic** (versioned in `backend/alembic/versions/`).
+- **Vector Columns**: 384-dimensional dense vectors (`vector(384)`) on `resumes` and `jobs`.
+- **Referential Integrity**: Cascading deletes (`ON DELETE CASCADE`) enforcing privacy and GDPR right-to-be-forgotten.
+
+### Entities Implemented in Foundation
+1. **`users`** (`User`): Authentication identity, roles, timestamps.
+2. **`resumes`** (`Resume`): Candidate text, structured JSONB data, 384-d vector embeddings (`Vector(384)`).
+3. **`jobs`** (`Job`): Target position, raw text, structured requirements JSONB, 384-d vector embeddings (`Vector(384)`).
+4. **`matches`** (`Match`): Composite & sub-scores (skills, semantic, exp, edu), breakdown & explanation payloads.
+5. **`skill_taxonomy`** (`SkillTaxonomy`): Canonical skills, category classifications, and alias arrays (`TEXT[]`).
 
 ---
 
-## 🛠️ Required Tool Versions
+## 🐳 Docker Desktop & Database Setup
 
-| Runtime / Tool | Primary Requirement | Host Detected Version | Status |
-| :--- | :--- | :--- | :--- |
-| **Python** | 3.11.x | Python 3.11.9 (`py -3.11`) | Installed & active in `backend/venv` |
-| **Node.js** | 20.x or 24.x | v24.14.0 | Installed |
-| **npm** | 10.x or 11.x | 11.9.0 | Installed |
-| **Git** | 2.x+ | 2.54.0 | Initialized & clean |
-| **Docker Desktop** | Recommended for Local DB | Not installed / Not running | Optional for Phase 1; needed for Dockerized Postgres |
-| **PostgreSQL + pgvector** | Primary DB Engine | Not locally active | Will be targeted in Database Foundation phase |
+To run the local PostgreSQL 16 + pgvector development database:
+
+1. **Install and Launch Docker Desktop**:
+   - If not installed, download from [docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop).
+   - Ensure the Docker daemon is running.
+
+2. **Start Development Database**:
+   ```powershell
+   # From repository root
+   docker compose up -d db
+   ```
+
+3. **Verify Database Container**:
+   ```powershell
+   docker compose ps
+   ```
 
 ---
 
 ## ⚙️ Environment Configuration
 
-1. Copy the example configuration:
-   ```bash
-   cp .env.example .env
-   ```
-2. The primary database profile is configured as `DATABASE_PROFILE=postgres_pgvector`.
-3. If running isolated unit tests without external services, `DATABASE_PROFILE=local_sqlite` is optionally available as a fallback.
+Copy the environment template:
+```powershell
+cp .env.example .env
+```
+
+Key database settings in `.env`:
+```ini
+DATABASE_PROFILE=postgres_pgvector
+DATABASE_URL="postgresql+asyncpg://resumematch_user:resumematch_password@localhost:5432/resumematch"
+POSTGRES_SERVER=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=resumematch_user
+POSTGRES_PASSWORD=resumematch_password
+POSTGRES_DB=resumematch
+```
 
 ---
 
-## 🚀 Local Setup & Startup Instructions
+## 🚀 Migration & Database Commands
 
-### 1. Backend Setup (FastAPI + Python 3.11)
+### Run Alembic Migrations
+```powershell
+# From repository root
+backend\venv\Scripts\alembic.exe upgrade head
 
-1. **Navigate to the backend directory and activate the virtual environment**:
-   ```powershell
-   # Windows PowerShell
-   cd backend
-   .\venv\Scripts\Activate.ps1
-   ```
+# Or from backend/ directory
+cd backend
+.\venv\Scripts\alembic upgrade head
+```
 
-2. **Install dependencies**:
-   ```powershell
-   pip install -r requirements.txt
-   ```
-
-3. **Start the backend development server**:
-   ```powershell
-   uvicorn app.main:app --reload --port 8000
-   ```
-
-4. **Verify Health Endpoint**:
-   - Web browser / cURL: [http://localhost:8000/health](http://localhost:8000/health)
-   - Interactive OpenAPI Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
-
-5. **Run Backend Test Suite**:
-   ```powershell
-   pytest tests/
-   ```
+### Run Database Integration Tests
+```powershell
+# Strictly executes against live PostgreSQL + pgvector
+backend\venv\Scripts\pytest.exe backend\tests\test_db_postgres.py -v
+```
 
 ---
 
-### 2. Frontend Setup (Next.js 16 + TypeScript)
+## 🚀 Local Service Startup
 
-1. **Navigate to the frontend directory**:
-   ```bash
-   cd frontend
-   ```
+### Backend (FastAPI)
+```powershell
+cd backend
+.\venv\Scripts\Activate.ps1
+uvicorn app.main:app --reload --port 8000
+```
+- Health Check: [http://localhost:8000/health](http://localhost:8000/health) (Service status)
+- Database Health Check: [http://localhost:8000/health/db](http://localhost:8000/health/db) (DB connectivity status)
+- OpenAPI Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Access the web app**:
-   - Navigate to [http://localhost:3000](http://localhost:3000)
-
-5. **Run Linting & Type Checking**:
-   ```bash
-   npm run lint
-   npx tsc --noEmit
-   ```
+### Frontend (Next.js 16)
+```powershell
+cd frontend
+npm run dev
+```
+- Web Application: [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## 🏛️ Architecture & Governance
 - Engineering Governance & Rules: [`AGENTS.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/AGENTS.md)
-- Product Requirements Document (PRD): [`docs/PRODUCT_REQUIREMENTS.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/PRODUCT_REQUIREMENTS.md)
-- System Architecture: [`docs/ARCHITECTURE.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/ARCHITECTURE.md)
+- Database Specification: [`docs/DATABASE_DESIGN.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/DATABASE_DESIGN.md)
 - AI/ML Architecture: [`docs/AI_ML_ARCHITECTURE.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/AI_ML_ARCHITECTURE.md)
-- Database Design: [`docs/DATABASE_DESIGN.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/DATABASE_DESIGN.md)
-- API Specification: [`docs/API_DESIGN.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/API_DESIGN.md)
-- Security & Privacy: [`docs/SECURITY.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/SECURITY.md)
-- Testing Strategy: [`docs/TESTING.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/TESTING.md)
-- Development Roadmap: [`docs/ROADMAP.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/ROADMAP.md)
+- Security Specification: [`docs/SECURITY.md`](file:///c:/Users/ap289/OneDrive/Desktop/RsmeMatch/docs/SECURITY.md)
