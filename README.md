@@ -6,7 +6,7 @@
 
 ## ⚠️ Development Status
 **Current State**: **Phase 1: Environment & Repository Scaffolding (Active Development)**  
-*This repository is currently under active foundational development and is not yet production-ready. Application features, parsers, neural embeddings, and database models will be implemented in subsequent development phases.*
+*This repository is currently in foundational scaffolding and is not yet production-ready. Application features, database models, authentication, PDF parsing, and AI/ML matching will be implemented in planned upcoming phases.*
 
 ---
 
@@ -20,16 +20,24 @@ ResumeMatch is a full-stack, explainable AI platform designed to match candidate
 
 ---
 
+## 🗄️ Database Architecture
+- **Primary Database**: **PostgreSQL + pgvector** (Primary storage for relational entities, foreign key constraints, and 384-dimensional vector embeddings).
+- **Local Development**: PostgreSQL, preferably run via **Docker Desktop** (or local PostgreSQL service).
+- **Production**: PostgreSQL 16 + `pgvector` extension.
+- **Optional Fallback**: SQLite exists strictly as an **optional, lightweight test/local development fallback** isolated cleanly behind the repository data-access layer.
+
+---
+
 ## 🛠️ Required Tool Versions
 
-| Runtime / Tool | Required Version | Host Detected Version |
-| :--- | :--- | :--- |
-| **Python** | 3.11.x | Python 3.11.9 (`py -3.11`) |
-| **Node.js** | 20.x or 24.x | v24.14.0 |
-| **npm** | 10.x or 11.x | 11.9.0 |
-| **Git** | 2.x+ | 2.54.0 |
-| **Docker / Docker Compose** | Optional (for containerized DB) | Not running on host (Local SQLite fallback used) |
-| **PostgreSQL + pgvector** | Optional (Production profile) | Optional for local Phase 1 |
+| Runtime / Tool | Primary Requirement | Host Detected Version | Status |
+| :--- | :--- | :--- | :--- |
+| **Python** | 3.11.x | Python 3.11.9 (`py -3.11`) | Installed & active in `backend/venv` |
+| **Node.js** | 20.x or 24.x | v24.14.0 | Installed |
+| **npm** | 10.x or 11.x | 11.9.0 | Installed |
+| **Git** | 2.x+ | 2.54.0 | Initialized & clean |
+| **Docker Desktop** | Recommended for Local DB | Not installed / Not running | Optional for Phase 1; needed for Dockerized Postgres |
+| **PostgreSQL + pgvector** | Primary DB Engine | Not locally active | Will be targeted in Database Foundation phase |
 
 ---
 
@@ -39,7 +47,8 @@ ResumeMatch is a full-stack, explainable AI platform designed to match candidate
    ```bash
    cp .env.example .env
    ```
-2. For local development without Docker, `DATABASE_PROFILE=local_sqlite` is configured by default.
+2. The primary database profile is configured as `DATABASE_PROFILE=postgres_pgvector`.
+3. If running isolated unit tests without external services, `DATABASE_PROFILE=local_sqlite` is optionally available as a fallback.
 
 ---
 
@@ -75,14 +84,14 @@ ResumeMatch is a full-stack, explainable AI platform designed to match candidate
 
 ---
 
-### 2. Frontend Setup (Next.js 15 + TypeScript)
+### 2. Frontend Setup (Next.js 16 + TypeScript)
 
 1. **Navigate to the frontend directory**:
    ```bash
    cd frontend
    ```
 
-2. **Install dependencies** (if not already installed):
+2. **Install dependencies**:
    ```bash
    npm install
    ```
