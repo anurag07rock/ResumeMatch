@@ -23,7 +23,10 @@ erDiagram
     USERS ||--o{ MATCHES : "performs"
     RESUMES ||--o{ MATCHES : "evaluated in"
     JOBS ||--o{ MATCHES : "targeted by"
-    SKILL_TAXONOMY ||--o{ SKILL_ALIASES : "has"
+    RESUMES ||--o{ RESUME_SKILLS : "has"
+    SKILL_TAXONOMY ||--o{ RESUME_SKILLS : "categorizes"
+    JOBS ||--o{ JOB_SKILLS : "requires"
+    SKILL_TAXONOMY ||--o{ JOB_SKILLS : "categorizes"
 
     USERS {
         uuid id PK
@@ -50,7 +53,7 @@ erDiagram
 
     JOBS {
         uuid id PK
-        uuid user_id FK
+        uuid user_id FK "nullable for ad-hoc"
         varchar title
         varchar company
         text raw_text
@@ -80,6 +83,16 @@ erDiagram
         varchar category
         text_array aliases
         timestamp created_at
+    }
+
+    RESUME_SKILLS {
+        uuid resume_id PK,FK
+        uuid skill_id PK,FK
+    }
+
+    JOB_SKILLS {
+        uuid job_id PK,FK
+        uuid skill_id PK,FK
     }
 ```
 
@@ -133,7 +146,8 @@ CREATE INDEX idx_resumes_structured_gin ON resumes USING gin (structured_data);
 ```
 
 #### `jobs`
-Stores job postings, required credentials, structured skill expectations, and target embeddings.
+Stores job postings, required credentials, structured skill expectations, and target embeddings. Supports both saved recruiter jobs and on-the-fly ad-hoc job submissions.
+- **Ad-hoc / Inline Job Ingestion Mapping**: Per AGENTS.md Rule 4, all inline job descriptions submitted on-the-fly for matching are persisted directly to a `Job` record. In this scenario, `user_id` may be null or set to the evaluating user, allowing immediate vector embedding and relational link to the resulting `Match` record.
 ```sql
 CREATE TABLE jobs (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -188,6 +202,30 @@ CREATE TABLE skill_taxonomy (
 
 CREATE INDEX idx_skill_taxonomy_category ON skill_taxonomy(category);
 CREATE INDEX idx_skill_taxonomy_aliases ON skill_taxonomy USING gin (aliases);
+```
+
+#### `resume_skills` (Association Table)
+Enforces normalized many-to-many relationships between resumes and canonical skills in `skill_taxonomy`.
+- Uses a composite primary key `(resume_id, skill_id)` to disallow duplicate skill associations.
+- Cascades on delete from both `resumes` and `skill_taxonomy`.
+```sql
+CREATE TABLE resume_skills (
+    resume_id UUID NOT NULL REFERENCES resumes(id) ON DELETE CASCADE,
+    skill_id UUID NOT NULL REFERENCES skill_taxonomy(id) ON DELETE CASCADE,
+    PRIMARY KEY (resume_id, skill_id)
+);
+```
+
+#### `job_skills` (Association Table)
+Enforces normalized many-to-many relationships between jobs and canonical skills in `skill_taxonomy`.
+- Uses a composite primary key `(job_id, skill_id)` to disallow duplicate skill associations.
+- Cascades on delete from both `jobs` and `skill_taxonomy`.
+```sql
+CREATE TABLE job_skills (
+    job_id UUID NOT NULL REFERENCES jobs(id) ON DELETE CASCADE,
+    skill_id UUID NOT NULL REFERENCES skill_taxonomy(id) ON DELETE CASCADE,
+    PRIMARY KEY (job_id, skill_id)
+);
 ```
 
 ---

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 import uuid
 from typing import Any, Dict
 from sqlalchemy import DateTime, Double, ForeignKey
@@ -45,7 +45,7 @@ class Match(Base):
     )
 
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=datetime.utcnow, nullable=False, index=True
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False, index=True
     )
 
     # Relationships

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 import uuid
 from typing import Any, Dict, List, Optional
 from sqlalchemy import DateTime, ForeignKey, String, Text
@@ -29,11 +29,16 @@ class Job(Base):
         Vector(384), nullable=True
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=datetime.utcnow, nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )
 
     # Relationships
     user: Mapped[Optional["User"]] = relationship("User", back_populates="jobs")
     matches: Mapped[List["Match"]] = relationship(
         "Match", back_populates="job", cascade="all, delete-orphan"
+    )
+    skills: Mapped[List["SkillTaxonomy"]] = relationship(
+        "SkillTaxonomy",
+        secondary="job_skills",
+        back_populates="jobs",
     )

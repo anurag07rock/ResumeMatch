@@ -1,9 +1,9 @@
-from datetime import datetime
+from datetime import UTC, datetime
 import uuid
 from typing import List
 from sqlalchemy import DateTime, String
 from sqlalchemy.dialects.postgresql import ARRAY, UUID
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.db.base import Base
 
 class SkillTaxonomy(Base):
@@ -22,5 +22,17 @@ class SkillTaxonomy(Base):
         ARRAY(String), default=list, nullable=False
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=datetime.utcnow, nullable=False
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
+    )
+
+    # Many-to-many relationships via association tables
+    resumes: Mapped[List["Resume"]] = relationship(
+        "Resume",
+        secondary="resume_skills",
+        back_populates="skills",
+    )
+    jobs: Mapped[List["Job"]] = relationship(
+        "Job",
+        secondary="job_skills",
+        back_populates="skills",
     )

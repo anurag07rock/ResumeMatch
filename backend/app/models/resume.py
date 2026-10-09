@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import UTC, datetime
 import uuid
 from typing import Any, Dict, List, Optional
 from sqlalchemy import DateTime, ForeignKey, Integer, String, Text
@@ -29,12 +29,12 @@ class Resume(Base):
         Vector(384), nullable=True
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), default=datetime.utcnow, nullable=False, index=True
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False, index=True
     )
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow,
+        default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC),
         nullable=False,
     )
 
@@ -42,4 +42,9 @@ class Resume(Base):
     user: Mapped["User"] = relationship("User", back_populates="resumes")
     matches: Mapped[List["Match"]] = relationship(
         "Match", back_populates="resume", cascade="all, delete-orphan"
+    )
+    skills: Mapped[List["SkillTaxonomy"]] = relationship(
+        "SkillTaxonomy",
+        secondary="resume_skills",
+        back_populates="resumes",
     )

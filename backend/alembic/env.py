@@ -19,6 +19,7 @@ from app.core.config import settings
 from app.db.base import Base
 # Ensure all models are imported so their metadata is registered with Base.metadata
 from app.models import User, Resume, Job, Match, SkillTaxonomy  # noqa: F401
+from app.models.association import resume_skills, job_skills  # noqa: F401
 
 config = context.config
 
@@ -29,6 +30,9 @@ if config.config_file_name is not None:
 target_metadata = Base.metadata
 
 def get_url() -> str:
+    cmd_url = config.get_main_option("sqlalchemy.url")
+    if cmd_url and not cmd_url.startswith("driver://"):
+        return cmd_url
     return settings.get_database_url()
 
 def run_migrations_offline() -> None:
