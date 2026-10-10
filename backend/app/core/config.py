@@ -46,6 +46,10 @@ class Settings(BaseSettings):
     MAX_TOKEN_CHUNK_SIZE: int = 512
     CHUNK_STRIDE: int = 128
 
+    # Ingestion & Document Limits (per docs/SECURITY.md)
+    MAX_PDF_SIZE_BYTES: int = 5 * 1024 * 1024  # 5 MB ceiling
+    MAX_PDF_PAGES: int = 10                     # 10 pages ceiling
+
     # Scoring Weights
     WEIGHT_SKILLS: float = 0.40
     WEIGHT_SEMANTIC: float = 0.35

@@ -35,7 +35,7 @@ graph TD
 ```
 
 ### Defense Protocols:
-1. **Magic Byte Verification**: Confirms file begins with `%PDF-` (`0x25 0x50 0x44 0x46 0x2D`) rather than relying on spoofable client-side MIME types or extensions.
+1. **Magic Header Verification**: Confirms file contains the `%PDF-` header within the first 1024 bytes (per ISO 32000-1 § 7.5.2) rather than relying on spoofable client-side MIME types or file extensions. *Note*: Magic header inspection validates the declared container type but does not eliminate polyglots or corrupted structures; deep protection is provided by downstream memory sandboxing and execution lockdown.
 2. **Memory Sandboxing**: Stream processed directly via Python `io.BytesIO`. Files are never written to unmanaged shared disk folders.
 3. **Execution Lockdown**: PyMuPDF disables all embedded JavaScript execution, active annotations, and dynamic XFA forms during text extraction.
 4. **Decompression Bomb Guard**: Extraction limits processing to a maximum of 10 pages and 500,000 raw characters per document.
