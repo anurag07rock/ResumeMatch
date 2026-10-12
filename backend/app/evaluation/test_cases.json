@@ -1,0 +1,973 @@
+{
+  "version": "1.0.0",
+  "metadata": {
+    "suite_name": "ResumeMatch AI/ML Ground-Truth Benchmark Dataset",
+    "description": "Curated synthetic, non-personal evaluation cases for skill extraction, education and seniority alignment, disambiguation, and hybrid match scoring.",
+    "total_cases": 32,
+    "created_at": "2026-10-12T18:30:00Z"
+  },
+  "test_cases": [
+    {
+      "id": "TC-01",
+      "category": "strong_alignment",
+      "name": "Senior Backend Python Engineer",
+      "description": "Candidate with 6 years experience and Master's degree matching all required and preferred backend competencies.",
+      "resume": {
+        "text": "Senior Backend Developer with 6 years of experience building scalable distributed web services. Core competencies include Python, FastAPI, PostgreSQL, Docker, Redis, and Git. Designed high-throughput microservices using asynchronous Python and relational databases. Master of Science in Computer Science.",
+        "annotated_skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "Redis", "Git"],
+        "annotated_experience_years": 6.0,
+        "annotated_education_level": "Master's"
+      },
+      "job": {
+        "title": "Senior Python Backend Engineer",
+        "text": "We are seeking a Senior Python Backend Engineer.\nRequired Qualifications:\n- 5+ years of software development experience\n- Strong proficiency in Python, FastAPI, and PostgreSQL\n- Experience with Docker containerization\n- Bachelor's degree in Computer Science or related field\n\nPreferred Qualifications:\n- Experience with Redis caching\n- Version control with Git",
+        "annotated_required_skills": ["Python", "FastAPI", "PostgreSQL", "Docker"],
+        "annotated_preferred_skills": ["Redis", "Git"],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Python", "FastAPI", "PostgreSQL", "Docker"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-02",
+      "category": "strong_alignment",
+      "name": "Senior Frontend TypeScript Engineer",
+      "description": "Candidate with 5 years experience matching TypeScript, React, Next.js, and Tailwind CSS requirements.",
+      "resume": {
+        "text": "Frontend Engineer with 5 years of professional experience developing responsive web applications. Expert in TypeScript, React, Next.js, Tailwind CSS, and HTML5. Built modular user interfaces and state-driven dashboards. Bachelor of Science in Information Technology.",
+        "annotated_skills": ["TypeScript", "React", "Next.js", "Tailwind CSS", "HTML5"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Senior Frontend Developer",
+        "text": "Looking for a Senior Frontend Developer to lead UI engineering.\nRequirements:\n- 4+ years of professional frontend development\n- Deep knowledge of TypeScript, React, and Next.js\n- Bachelor's degree in Computer Science or equivalent\nPreferred:\n- Experience with Tailwind CSS\n- Semantic HTML5 and accessibility",
+        "annotated_required_skills": ["TypeScript", "React", "Next.js"],
+        "annotated_preferred_skills": ["Tailwind CSS", "HTML5"],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["TypeScript", "React", "Next.js"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-03",
+      "category": "strong_alignment",
+      "name": "Cloud DevOps Infrastructure Architect",
+      "description": "Cloud Engineer with 7 years experience matching AWS, Kubernetes, Terraform, and CI/CD.",
+      "resume": {
+        "text": "Cloud Infrastructure Engineer with 7 years of production experience managing cloud environments. Proficient in AWS, Kubernetes, Terraform, Docker, and CI/CD automation pipelines. Implemented GitOps workflows and infrastructure-as-code templates. B.S. in Computer Engineering.",
+        "annotated_skills": ["AWS", "Kubernetes", "Terraform", "Docker", "CI/CD"],
+        "annotated_experience_years": 7.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "DevOps Cloud Architect",
+        "text": "Seeking an experienced DevOps Cloud Architect.\nRequirements:\n- 6+ years of cloud operations experience\n- Production mastery of AWS, Kubernetes, and Terraform\n- Bachelor's degree in engineering\nPreferred:\n- Containerization using Docker\n- Automated CI/CD pipelines",
+        "annotated_required_skills": ["AWS", "Kubernetes", "Terraform"],
+        "annotated_preferred_skills": ["Docker", "CI/CD"],
+        "annotated_required_experience_years": 6.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["AWS", "Kubernetes", "Terraform"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-04",
+      "category": "partial_overlap",
+      "name": "Backend Developer Missing Cloud and Orchestration",
+      "description": "Candidate matches Python and PostgreSQL but misses Go and Kubernetes; 4 years vs 5 years required.",
+      "resume": {
+        "text": "Backend Software Developer with 4 years of experience specializing in Python and PostgreSQL database engineering. Built REST APIs using Django and Celery. Familiar with Linux systems. B.S. in Computer Science.",
+        "annotated_skills": ["Python", "PostgreSQL", "Django", "Celery", "Linux"],
+        "annotated_experience_years": 4.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Senior Systems Engineer",
+        "text": "Looking for a Senior Systems Engineer.\nRequired Qualifications:\n- 5+ years of backend development\n- Hands-on mastery of Python, Go, Kubernetes, and PostgreSQL\n- Bachelor's degree\nPreferred:\n- Linux systems administration",
+        "annotated_required_skills": ["Python", "Go", "Kubernetes", "PostgreSQL"],
+        "annotated_preferred_skills": ["Linux"],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "MODERATE_MATCH",
+        "expected_skills_matched": ["Python", "PostgreSQL"],
+        "expected_skills_missing": ["Go", "Kubernetes"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 45.0,
+        "max_overall_score": 75.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-05",
+      "category": "partial_overlap",
+      "name": "Angular Engineer Transitioning to React Role",
+      "description": "Candidate matches TypeScript and CSS but lacks React and Redux.",
+      "resume": {
+        "text": "Frontend Developer with 3 years of experience building enterprise web portals. Highly proficient in Angular, TypeScript, RxJS, and CSS. Experienced with REST APIs. B.S. in Software Engineering.",
+        "annotated_skills": ["Angular", "TypeScript", "RxJS", "CSS"],
+        "annotated_experience_years": 3.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "React Frontend Engineer",
+        "text": "Seeking a Frontend Engineer focused on React ecosystem.\nRequirements:\n- 4+ years of frontend experience\n- Strong hands-on experience with React, Redux, and TypeScript\n- Bachelor's degree\nPreferred:\n- Modern CSS layouts",
+        "annotated_required_skills": ["React", "Redux", "TypeScript"],
+        "annotated_preferred_skills": ["CSS"],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "MODERATE_MATCH",
+        "expected_skills_matched": ["TypeScript"],
+        "expected_skills_missing": ["React", "Redux"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 45.0,
+        "max_overall_score": 75.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-06",
+      "category": "partial_overlap",
+      "name": "Data Analyst Missing Distributed Big Data Stack",
+      "description": "Candidate matches Python and SQL but misses Apache Spark and Apache Kafka.",
+      "resume": {
+        "text": "Data Analyst with 3 years of experience writing SQL queries, relational database modeling, and building data cleaning scripts in Python. Generated business insights and dashboards. Bachelor's in Mathematics.",
+        "annotated_skills": ["Python", "SQL"],
+        "annotated_experience_years": 3.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Senior Data Platform Engineer",
+        "text": "We are hiring a Senior Data Engineer.\nRequirements:\n- 5+ years of data engineering\n- Expertise in Apache Spark, Apache Kafka, and Python\n- Bachelor's degree\nPreferred:\n- Advanced SQL",
+        "annotated_required_skills": ["Apache Spark", "Apache Kafka", "Python"],
+        "annotated_preferred_skills": ["SQL"],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "MODERATE_MATCH",
+        "expected_skills_matched": ["Python"],
+        "expected_skills_missing": ["Apache Spark", "Apache Kafka"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 45.0,
+        "max_overall_score": 75.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-07",
+      "category": "weak_alignment",
+      "name": "IT Support Technician Applying for Senior ML Engineer",
+      "description": "Candidate shares generic tools Git and Linux but lacks PyTorch, TensorFlow, and Python.",
+      "resume": {
+        "text": "IT Systems Support Specialist with 3 years of experience managing workstation hardware, network troubleshooting, Linux desktop provisioning, and maintaining documentation using Git. Associate Degree in Computer Networking.",
+        "annotated_skills": ["Linux", "Git"],
+        "annotated_experience_years": 3.0,
+        "annotated_education_level": "Associate"
+      },
+      "job": {
+        "title": "Senior Machine Learning Engineer",
+        "text": "We are looking for a Senior Machine Learning Engineer.\nRequirements:\n- 6+ years in machine learning and deep learning\n- Expert in Python, PyTorch, and TensorFlow\n- Master's degree in Computer Science\nPreferred:\n- Linux development environments\n- Version control with Git",
+        "annotated_required_skills": ["Python", "PyTorch", "TensorFlow"],
+        "annotated_preferred_skills": ["Linux", "Git"],
+        "annotated_required_experience_years": 6.0,
+        "annotated_required_education_level": "Master's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["Python", "PyTorch", "TensorFlow"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "BELOW_REQUIREMENT",
+        "min_overall_score": 15.0,
+        "max_overall_score": 49.9,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-08",
+      "category": "weak_alignment",
+      "name": "Web Content Coordinator Applying for Distributed Systems Architect",
+      "description": "Candidate knows HTML and Markdown but lacks Go, gRPC, and Docker.",
+      "resume": {
+        "text": "Web Content Coordinator with 2 years of experience managing online blog publishing, styling layout pages with HTML, and drafting documentation in Markdown. Bachelor of Arts in Communications.",
+        "annotated_skills": ["HTML", "Markdown"],
+        "annotated_experience_years": 2.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Distributed Systems Architect",
+        "text": "Seeking a Distributed Systems Architect.\nRequirements:\n- 8+ years designing fault-tolerant backends\n- Deep expertise in Go, gRPC, and Docker\n- Master's degree in Computer Science",
+        "annotated_required_skills": ["Go", "gRPC", "Docker"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 8.0,
+        "annotated_required_education_level": "Master's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["Go", "gRPC", "Docker"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "PARTIALLY_ALIGNED",
+        "min_overall_score": 0.0,
+        "max_overall_score": 45.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-09",
+      "category": "weak_alignment",
+      "name": "Manual QA Tester Applying for Cloud Security Architect",
+      "description": "Candidate shares JIRA but lacks Cryptography and Penetration Testing.",
+      "resume": {
+        "text": "Quality Assurance Specialist with 2 years of experience conducting manual regression testing, bug reporting in JIRA, and test case documentation. Associate Degree in Information Systems.",
+        "annotated_skills": ["JIRA"],
+        "annotated_experience_years": 2.0,
+        "annotated_education_level": "Associate"
+      },
+      "job": {
+        "title": "Principal Cloud Security Architect",
+        "text": "Seeking a Principal Cloud Security Architect.\nRequirements:\n- 8+ years in information security\n- Hands-on penetration testing and Cryptography\n- Bachelor's degree\nPreferred:\n- Tracking remediations in JIRA",
+        "annotated_required_skills": ["Cryptography"],
+        "annotated_preferred_skills": ["JIRA"],
+        "annotated_required_experience_years": 8.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["Cryptography"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "PARTIALLY_ALIGNED",
+        "min_overall_score": 15.0,
+        "max_overall_score": 49.9,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-10",
+      "category": "no_overlap",
+      "name": "Digital Marketing Manager vs Embedded Rust Firmware",
+      "description": "Completely unrelated marketing profile applied to embedded firmware engineering role; zero skill overlap.",
+      "resume": {
+        "text": "Digital Marketing Manager with 6 years experience in search engine optimization, content creation, social media growth, Google Analytics, and lead nurturing campaigns. Bachelor of Arts in Marketing.",
+        "annotated_skills": ["SEO", "Google Analytics"],
+        "annotated_experience_years": 6.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Embedded Rust Firmware Engineer",
+        "text": "Looking for an Embedded Firmware Engineer.\nRequirements:\n- 4+ years embedded systems programming\n- Rust, RTOS, ARM Cortex, and Microcontrollers\n- Bachelor's in Electrical Engineering or Computer Engineering",
+        "annotated_required_skills": ["Rust", "RTOS", "Microcontrollers"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["Rust", "RTOS", "Microcontrollers"],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 0.0,
+        "max_overall_score": 35.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-11",
+      "category": "no_overlap",
+      "name": "Financial Accountant vs Kubernetes Cloud Architect",
+      "description": "Accounting and ledger background matched against cloud infrastructure role; zero technical overlap.",
+      "resume": {
+        "text": "Certified Public Accountant with 5 years experience in financial reporting, corporate tax audits, general ledger accounting, and QuickBooks reconciliations. B.S. in Accounting.",
+        "annotated_skills": ["Accounting", "Auditing"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Kubernetes Cloud Infrastructure Architect",
+        "text": "Seeking a Kubernetes Cloud Architect.\nRequirements:\n- 5+ years managing distributed cloud infrastructure\n- Kubernetes, Terraform, Docker, and AWS\n- Bachelor's degree in engineering",
+        "annotated_required_skills": ["Kubernetes", "Terraform", "Docker", "AWS"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["Kubernetes", "Terraform", "Docker", "AWS"],
+        "expected_experience_status": "MEETS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 0.0,
+        "max_overall_score": 35.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-12",
+      "category": "no_overlap",
+      "name": "Graphic Designer vs Database Administrator",
+      "description": "Visual designer with Photoshop/Illustrator skills applying for PostgreSQL/Oracle DBA role.",
+      "resume": {
+        "text": "Graphic Designer with 4 years experience creating branding assets, visual layouts, and vector illustrations in Adobe Photoshop, Adobe Illustrator, and Figma. Bachelor of Fine Arts.",
+        "annotated_skills": ["Photoshop", "Illustrator", "Figma"],
+        "annotated_experience_years": 4.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Lead Database Administrator",
+        "text": "We are hiring a Lead DBA.\nRequirements:\n- 5+ years of production database operations\n- PostgreSQL and Oracle\n- Bachelor's degree in Computer Science",
+        "annotated_required_skills": ["PostgreSQL", "Oracle"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["PostgreSQL", "Oracle"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 0.0,
+        "max_overall_score": 35.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-13",
+      "category": "seniority_mismatch",
+      "name": "Junior Developer Applying for Staff Engineer",
+      "description": "Junior candidate with 1 year experience applying for Staff role requiring 8 years.",
+      "resume": {
+        "text": "Junior Software Engineer with 1 year experience writing backend API endpoints in Go and PostgreSQL. Assisted in Docker deployments. Bachelor of Science in Computer Science.",
+        "annotated_skills": ["Go", "PostgreSQL", "Docker"],
+        "annotated_experience_years": 1.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Staff Backend Engineer",
+        "text": "Looking for a Staff Backend Engineer.\nRequirements:\n- 8+ years of distributed backend systems experience\n- Go, PostgreSQL, Docker, and Kubernetes\n- Bachelor's degree",
+        "annotated_required_skills": ["Go", "PostgreSQL", "Docker", "Kubernetes"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 8.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "MODERATE_MATCH",
+        "expected_skills_matched": ["Go", "PostgreSQL", "Docker"],
+        "expected_skills_missing": ["Kubernetes"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 45.0,
+        "max_overall_score": 78.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-14",
+      "category": "seniority_mismatch",
+      "name": "Staff Architect Applying for Mid-Level Engineer",
+      "description": "Experienced Architect with 12 years applying for Mid-Level role requiring 4 years.",
+      "resume": {
+        "text": "Staff Software Architect with 12 years of hands-on experience designing cloud distributed platforms. Expert in Python, FastAPI, Docker, and PostgreSQL. Master of Science in Computer Science.",
+        "annotated_skills": ["Python", "FastAPI", "Docker", "PostgreSQL"],
+        "annotated_experience_years": 12.0,
+        "annotated_education_level": "Master's"
+      },
+      "job": {
+        "title": "Mid-Level Python Developer",
+        "text": "Seeking a Mid-Level Python Developer.\nRequirements:\n- 4+ years of professional backend experience\n- Python, FastAPI, Docker, and PostgreSQL\n- Bachelor's degree",
+        "annotated_required_skills": ["Python", "FastAPI", "Docker", "PostgreSQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Python", "FastAPI", "Docker", "PostgreSQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 80.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-15",
+      "category": "seniority_mismatch",
+      "name": "Fresh Graduate with Zero Years Applying for Senior",
+      "description": "New graduate with 0 years experience applying for Senior Engineer requiring 5 years; tests zero-experience floor penalty.",
+      "resume": {
+        "text": "Recent Computer Science graduate with strong academic foundation in Python, algorithms, and SQL database design. Completed academic capstone projects. Bachelor of Science in Computer Science.",
+        "annotated_skills": ["Python", "SQL"],
+        "annotated_experience_years": 0.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Senior Software Engineer",
+        "text": "Looking for a Senior Software Engineer.\nRequirements:\n- 5+ years of software engineering\n- Python and SQL proficiency\n- Bachelor's degree",
+        "annotated_required_skills": ["Python", "SQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "MODERATE_MATCH",
+        "expected_skills_matched": ["Python", "SQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 40.0,
+        "max_overall_score": 92.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-16",
+      "category": "education_mismatch",
+      "name": "Master's Required vs Bachelor's Held (1 Step Down)",
+      "description": "Job requires Master's, candidate holds Bachelor's (1 hierarchy step down, score = 85).",
+      "resume": {
+        "text": "Software Engineer with 4 years experience in Python and PostgreSQL. Bachelor of Science in Computer Science.",
+        "annotated_skills": ["Python", "PostgreSQL"],
+        "annotated_experience_years": 4.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Research Software Engineer",
+        "text": "Requirements:\n- 4+ years experience\n- Python and PostgreSQL\n- Master's degree in Computer Science or Mathematics",
+        "annotated_required_skills": ["Python", "PostgreSQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Master's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Python", "PostgreSQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "MEETS_REQUIREMENT",
+        "expected_education_status": "PARTIALLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 99.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-17",
+      "category": "education_mismatch",
+      "name": "Doctorate Required vs Bachelor's Held (2 Steps Down)",
+      "description": "Job requires Ph.D., candidate holds Bachelor's (2 hierarchy steps down, score = 60).",
+      "resume": {
+        "text": "Data Scientist with 5 years experience in Python, PyTorch, and NumPy. Bachelor of Science in Statistics.",
+        "annotated_skills": ["Python", "PyTorch", "NumPy"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Principal AI Research Scientist",
+        "text": "Requirements:\n- 5+ years experience\n- Python, PyTorch, and NumPy\n- Ph.D. in Artificial Intelligence or Computer Science",
+        "annotated_required_skills": ["Python", "PyTorch", "NumPy"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Doctorate"
+      },
+      "expected": {
+        "expected_fit_category": "MODERATE_MATCH",
+        "expected_skills_matched": ["Python", "PyTorch", "NumPy"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "MEETS_REQUIREMENT",
+        "expected_education_status": "BELOW_REQUIREMENT",
+        "min_overall_score": 65.0,
+        "max_overall_score": 85.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-18",
+      "category": "education_mismatch",
+      "name": "Doctorate Required vs High School Held (3+ Steps Down)",
+      "description": "Job requires Ph.D., candidate has High School diploma (3 steps down, score = 30).",
+      "resume": {
+        "text": "Self-taught programmer with 5 years experience in Python and PostgreSQL. High School Diploma.",
+        "annotated_skills": ["Python", "PostgreSQL"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "High School"
+      },
+      "job": {
+        "title": "Principal Research Fellow",
+        "text": "Requirements:\n- 5+ years experience\n- Python and PostgreSQL\n- Doctorate in Computer Science",
+        "annotated_required_skills": ["Python", "PostgreSQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Doctorate"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Python", "PostgreSQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "MEETS_REQUIREMENT",
+        "expected_education_status": "BELOW_REQUIREMENT",
+        "min_overall_score": 85.0,
+        "max_overall_score": 98.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-19",
+      "category": "education_mismatch",
+      "name": "Unspecified Degree in Job Requirements",
+      "description": "Job specifies no minimum degree requirement (Rr = 0 -> score = 100).",
+      "resume": {
+        "text": "Software Developer with 3 years experience in Python and Docker. Associate Degree in Technology.",
+        "annotated_skills": ["Python", "Docker"],
+        "annotated_experience_years": 3.0,
+        "annotated_education_level": "Associate"
+      },
+      "job": {
+        "title": "Software Developer",
+        "text": "Requirements:\n- 3+ years experience\n- Python and Docker\nNo specific degree required; equivalent practical experience valued.",
+        "annotated_required_skills": ["Python", "Docker"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "Unspecified"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Python", "Docker"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "MEETS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-20",
+      "category": "alias_canonicalization",
+      "name": "Technical Aliases (k8s, postgres, py, golang, aws, terraform)",
+      "description": "Candidate text uses shorthand aliases; tests normalization to canonical names.",
+      "resume": {
+        "text": "DevOps engineer with 5 years experience deploying k8s clusters on aws using terraform infrastructure. Wrote backend services in golang and py, connected to postgres databases. Bachelor's in CS.",
+        "annotated_skills": ["Kubernetes", "AWS", "Terraform", "Go", "Python", "PostgreSQL"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Cloud Platform Engineer",
+        "text": "Requirements:\n- 4+ years experience\n- Kubernetes, AWS, Terraform, Go, Python, and PostgreSQL\n- Bachelor's degree",
+        "annotated_required_skills": ["Kubernetes", "AWS", "Terraform", "Go", "Python", "PostgreSQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Kubernetes", "AWS", "Terraform", "Go", "Python", "PostgreSQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-21",
+      "category": "alias_canonicalization",
+      "name": "Frontend Framework Aliases (reactjs, nextjs, vuejs, nodejs)",
+      "description": "Candidate uses suffixed js aliases that must resolve to canonical framework names.",
+      "resume": {
+        "text": "Full stack engineer with 4 years experience building web apps with reactjs and nextjs frontend, backed by nodejs microservices. Also familiar with vuejs. B.S. in Software Engineering.",
+        "annotated_skills": ["React", "Next.js", "Node.js", "Vue.js"],
+        "annotated_experience_years": 4.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Full Stack Developer",
+        "text": "Requirements:\n- 3+ years experience\n- React, Next.js, and Node.js\n- Bachelor's degree\nPreferred:\n- Vue.js",
+        "annotated_required_skills": ["React", "Next.js", "Node.js"],
+        "annotated_preferred_skills": ["Vue.js"],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["React", "Next.js", "Node.js"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-22",
+      "category": "alias_canonicalization",
+      "name": "Database Aliases (mongo, es cluster, mssql, redis cache)",
+      "description": "Candidate uses shorthand database aliases which must map to canonical database names.",
+      "resume": {
+        "text": "Data systems engineer with 5 years experience administering mongo document databases, indexing data with es cluster nodes, querying mssql servers, and caching with redis cache. B.S. in CS.",
+        "annotated_skills": ["MongoDB", "Elasticsearch", "Microsoft SQL Server", "Redis"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Data Infrastructure Engineer",
+        "text": "Requirements:\n- 4+ years experience\n- MongoDB, Elasticsearch, Microsoft SQL Server, and Redis\n- Bachelor's degree",
+        "annotated_required_skills": ["MongoDB", "Elasticsearch", "Microsoft SQL Server", "Redis"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["MongoDB", "Elasticsearch", "Microsoft SQL Server", "Redis"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-23",
+      "category": "ambiguous_short_names",
+      "name": "Disambiguation Negative Contexts (C, R, Go, D)",
+      "description": "Text contains non-skill usage: 'C-suite executive', 'vitamin C', 'R&D', 'Go ahead', '3D'. Zero programming skills should be extracted.",
+      "resume": {
+        "text": "Executive Assistant working directly with C-suite leadership. Coordinated with R&D teams on health supplements containing vitamin C and D. Prepared 3D presentation models. Ready to Go ahead with new business initiatives. Bachelor of Arts.",
+        "annotated_skills": [],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Executive Coordinator",
+        "text": "Requirements:\n- 3+ years experience assisting executive teams\n- Strong calendar and presentation skills\n- Bachelor's degree",
+        "annotated_required_skills": [],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "NO_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 10.0,
+        "max_overall_score": 55.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-24",
+      "category": "ambiguous_short_names",
+      "name": "True Positive C Programming Language",
+      "description": "Candidate text contains genuine C programming context; skill extractor must extract canonical 'C'.",
+      "resume": {
+        "text": "Systems programmer with 6 years experience writing low-level kernel drivers and network daemons in C and C++. Bachelor of Science in Computer Engineering.",
+        "annotated_skills": ["C", "C++"],
+        "annotated_experience_years": 6.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Embedded Systems Engineer",
+        "text": "Requirements:\n- 5+ years systems programming\n- Strong proficiency in C and C++\n- Bachelor's degree",
+        "annotated_required_skills": ["C", "C++"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 5.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["C", "C++"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-25",
+      "category": "ambiguous_short_names",
+      "name": "True Positive Go and R Programming Languages",
+      "description": "Candidate text contains genuine Go and R programming contexts; skill extractor must extract canonical 'Go' and 'R'.",
+      "resume": {
+        "text": "Software engineer with 4 years experience developing high-performance microservices in Go and statistical analysis pipelines in R. Bachelor of Science in Statistics.",
+        "annotated_skills": ["Go", "R"],
+        "annotated_experience_years": 4.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Quantitative Data Developer",
+        "text": "Requirements:\n- 3+ years experience\n- Go backend services and R statistical packages\n- Bachelor's degree",
+        "annotated_required_skills": ["Go", "R"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Go", "R"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-26",
+      "category": "compound_skills",
+      "name": "Compound Skill React Native Priority",
+      "description": "Candidate specifies 'React Native'. Extractor must identify 'React Native' and prioritize the compound phrase.",
+      "resume": {
+        "text": "Mobile App Developer with 4 years experience building iOS and Android applications using React Native and Redux. B.S. in Computer Science.",
+        "annotated_skills": ["React Native", "Redux"],
+        "annotated_experience_years": 4.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Mobile Engineer",
+        "text": "Requirements:\n- 3+ years mobile development\n- React Native and Redux\n- Bachelor's degree",
+        "annotated_required_skills": ["React Native", "Redux"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["React Native", "Redux"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-27",
+      "category": "compound_skills",
+      "name": "Compound Apache Ecosystem Skills",
+      "description": "Candidate uses 'Apache Kafka' and 'Apache Spark'; extractor captures the full canonical names.",
+      "resume": {
+        "text": "Data Engineer with 5 years experience streaming event pipelines using Apache Kafka and processing large datasets with Apache Spark in Python. Master's in Data Science.",
+        "annotated_skills": ["Apache Kafka", "Apache Spark", "Python"],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "Master's"
+      },
+      "job": {
+        "title": "Big Data Engineer",
+        "text": "Requirements:\n- 4+ years big data experience\n- Apache Kafka, Apache Spark, and Python\n- Bachelor's degree",
+        "annotated_required_skills": ["Apache Kafka", "Apache Spark", "Python"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 4.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Apache Kafka", "Apache Spark", "Python"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-28",
+      "category": "boundary_malformed",
+      "name": "Empty String Resume Text",
+      "description": "Resume text is empty string; extractor returns empty skills and pipeline handles gracefully.",
+      "resume": {
+        "text": "",
+        "annotated_skills": [],
+        "annotated_experience_years": 0.0,
+        "annotated_education_level": "Unspecified"
+      },
+      "job": {
+        "title": "Backend Developer",
+        "text": "Requirements:\n- 3+ years experience\n- Python and PostgreSQL",
+        "annotated_required_skills": ["Python", "PostgreSQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "Bachelor's"
+      },
+      "expected": {
+        "expected_fit_category": "ERROR",
+        "expected_skills_matched": [],
+        "expected_skills_missing": ["Python", "PostgreSQL"],
+        "expected_experience_status": "BELOW_REQUIREMENT",
+        "expected_education_status": "BELOW_REQUIREMENT",
+        "min_overall_score": 0.0,
+        "max_overall_score": 0.0,
+        "is_error_case": true,
+        "expected_error_type": "ValueError"
+      }
+    },
+    {
+      "id": "TC-29",
+      "category": "boundary_malformed",
+      "name": "Whitespace Only Job Description",
+      "description": "Job description text contains only whitespace; pipeline handles gracefully.",
+      "resume": {
+        "text": "Software engineer with 3 years experience in Python. Bachelor's in CS.",
+        "annotated_skills": ["Python"],
+        "annotated_experience_years": 3.0,
+        "annotated_education_level": "Bachelor's"
+      },
+      "job": {
+        "title": "Unknown Role",
+        "text": "   \n\t   \n  ",
+        "annotated_required_skills": [],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 0.0,
+        "annotated_required_education_level": "Unspecified"
+      },
+      "expected": {
+        "expected_fit_category": "ERROR",
+        "expected_skills_matched": [],
+        "expected_skills_missing": [],
+        "expected_experience_status": "MEETS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 0.0,
+        "max_overall_score": 0.0,
+        "is_error_case": true,
+        "expected_error_type": "ValueError"
+      }
+    },
+    {
+      "id": "TC-30",
+      "category": "boundary_malformed",
+      "name": "Non-Technical Job With Zero Technical Skills",
+      "description": "Job description contains zero identifiable technical skills from the taxonomy.",
+      "resume": {
+        "text": "Experienced professional with 5 years in retail store management and customer support. High School Diploma.",
+        "annotated_skills": [],
+        "annotated_experience_years": 5.0,
+        "annotated_education_level": "High School"
+      },
+      "job": {
+        "title": "Retail Team Lead",
+        "text": "Requirements:\n- 3+ years customer service experience\n- Friendly personality and punctual attendance\n- High school diploma",
+        "annotated_required_skills": [],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 3.0,
+        "annotated_required_education_level": "High School"
+      },
+      "expected": {
+        "expected_fit_category": "LOW_MATCH",
+        "expected_skills_matched": [],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 25.0,
+        "max_overall_score": 65.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-31",
+      "category": "long_text_chunking",
+      "name": "Extensive Multi-Page Resume (> 700 Words)",
+      "description": "Long resume exceeding sequence ceiling to verify sliding-window chunking and mean pooling aggregation without truncation.",
+      "resume": {
+        "text": "SENIOR PRINCIPAL PLATFORM ARCHITECT\nSummary of Qualifications: Over 10 years of extensive experience designing, architecting, and delivering enterprise cloud infrastructure and high-scale backend distributed systems. Proven track record leading multi-disciplinary engineering organizations, establishing continuous integration workflows, and optimizing database performance across diverse production environments.\n\nTECHNICAL SKILLS INVENTORY:\nLanguages: Python, Go, TypeScript, Rust, C++, Java, Bash, SQL\nFrameworks: FastAPI, Django, Flask, React, Next.js, Express, Spring Boot\nDatabases: PostgreSQL, MySQL, MongoDB, Redis, Cassandra, Elasticsearch\nCloud and DevOps: AWS, Google Cloud Platform, Microsoft Azure, Kubernetes, Docker, Terraform, Helm, Prometheus, Grafana, Ansible\nMethodologies: Microservices Architecture, Domain Driven Design, Test Driven Development, Agile Scrum, Site Reliability Engineering\n\nPROFESSIONAL WORK EXPERIENCE:\nLead Cloud Platform Architect | Apex Global Technologies | 2020 - Present (4 years)\n- Spearheaded architectural evolution from monolithic legacy codebase to containerized Kubernetes microservices on AWS infrastructure.\n- Designed resilient data ingestion pipeline handling 50,000 requests per second using Apache Kafka and Python backend microservices.\n- Configured multi-region PostgreSQL database clusters with automated failover and read replicas, reducing query latency by 45%.\n- Authored Terraform infrastructure-as-code modules managing 300+ cloud resources with strict security compliance.\n\nSenior Systems Engineer | Horizon Cloud Systems | 2016 - 2020 (4 years)\n- Engineered asynchronous web APIs utilizing Python and FastAPI with Redis caching layers for mission-critical customer portals.\n- Built comprehensive CI/CD pipelines deploying Docker containers to production Kubernetes clusters with zero-downtime rolling updates.\n- Implemented Prometheus monitoring and Grafana operational dashboards across all microservice clusters.\n\nBackend Software Developer | Vanguard Software Solutions | 2014 - 2016 (2 years)\n- Developed relational database queries and stored procedures in PostgreSQL and MySQL.\n- Maintained customer-facing web applications using Python and Django.\n- Collaborated on git version control and automated unit testing suites.\n\nEDUCATION AND CERTIFICATIONS:\n- Master of Science in Computer Science, Stanford University\n- Bachelor of Science in Computer Engineering, University of California, Berkeley",
+        "annotated_skills": ["Python", "Go", "TypeScript", "FastAPI", "React", "PostgreSQL", "MongoDB", "Redis", "AWS", "Kubernetes", "Docker", "Terraform", "Apache Kafka"],
+        "annotated_experience_years": 10.0,
+        "annotated_education_level": "Master's"
+      },
+      "job": {
+        "title": "Principal Cloud Infrastructure Architect",
+        "text": "We are seeking a Principal Cloud Infrastructure Architect to lead enterprise platform modernization.\n\nCore Responsibilities:\n- Lead the architecture and continuous deployment of mission-critical cloud platforms.\n- Define organizational standards for container orchestration, distributed caching, and relational database scalability.\n\nRequired Qualifications:\n- 8+ years of production experience in backend software and cloud platform engineering.\n- Hands-on mastery of Python, AWS, Kubernetes, Terraform, and PostgreSQL.\n- Master's degree or equivalent technical experience.\n\nPreferred Qualifications:\n- High-throughput streaming experience with Apache Kafka\n- In-memory data store management with Redis\n- Additional language proficiency in Go or TypeScript",
+        "annotated_required_skills": ["Python", "AWS", "Kubernetes", "Terraform", "PostgreSQL"],
+        "annotated_preferred_skills": ["Apache Kafka", "Redis", "Go", "TypeScript"],
+        "annotated_required_experience_years": 8.0,
+        "annotated_required_education_level": "Master's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Python", "AWS", "Kubernetes", "Terraform", "PostgreSQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 75.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    },
+    {
+      "id": "TC-32",
+      "category": "long_text_chunking",
+      "name": "Extensive Multi-Page Enterprise Job Description (> 700 Words)",
+      "description": "Long job description exceeding sequence ceiling to verify sliding-window chunking without truncation.",
+      "resume": {
+        "text": "Senior Distributed Systems Engineer with 8 years experience architecting backend platforms. Mastery of Go, Python, Kubernetes, Docker, and PostgreSQL. Designed high-throughput microservices capable of processing hundreds of thousands of transactions per second. Mentored junior and senior developers on cloud best practices and automated CI/CD pipelines. Master of Science in Computer Science.",
+        "annotated_skills": ["Go", "Python", "Kubernetes", "Docker", "PostgreSQL"],
+        "annotated_experience_years": 8.0,
+        "annotated_education_level": "Master's"
+      },
+      "job": {
+        "title": "Enterprise Staff Systems Architect",
+        "text": "COMPANY OVERVIEW:\nGlobal Enterprise Systems is an international leader in enterprise infrastructure and digital transformation. We deliver mission-critical platforms to Fortune 500 organizations worldwide. Our engineering culture emphasizes technical excellence, architectural rigor, and collaborative problem solving.\n\nPOSITION SUMMARY:\nWe are seeking an Enterprise Staff Systems Architect to lead the modernization of our core platform architecture. In this role, you will collaborate with cross-functional product management, security compliance, and engineering teams across multiple time zones.\n\nKEY DUTIES AND RESPONSIBILITIES:\n- Drive the multi-year technical vision and architectural governance for enterprise distributed services across the company.\n- Design and implement highly available backend microservices capable of processing hundreds of thousands of transactions per second with low latency.\n- Champion engineering excellence, infrastructure-as-code automation, container security, and comprehensive observability across all service tiers.\n- Mentor senior engineering staff through architectural reviews, design documentation, and engineering brown-bag workshops.\n- Interface directly with security and compliance officers to guarantee adherence to SOC 2, HIPAA, and GDPR regulatory frameworks.\n- Establish testing standards, unit testing frameworks, and integration testing protocols for zero-downtime continuous deployment.\n\nREQUIRED TECHNICAL QUALIFICATIONS:\n- 7+ years of professional backend software engineering and systems architecture experience.\n- Production mastery of Go and Python programming languages.\n- Proven expertise managing production container workloads on Kubernetes and Docker.\n- In-depth relational database architecture and query optimization using PostgreSQL.\n- Master's degree in Computer Science, Software Engineering, or related discipline.\n\nDESIRED / PREFERRED COMPETENCIES:\n- Experience with event-driven architectures and distributed logging pipelines.\n- Familiarity with zero-trust network architectures and cryptographic protocols.\n- Excellent written and verbal technical communication skills.",
+        "annotated_required_skills": ["Go", "Python", "Kubernetes", "Docker", "PostgreSQL"],
+        "annotated_preferred_skills": [],
+        "annotated_required_experience_years": 7.0,
+        "annotated_required_education_level": "Master's"
+      },
+      "expected": {
+        "expected_fit_category": "STRONG_MATCH",
+        "expected_skills_matched": ["Go", "Python", "Kubernetes", "Docker", "PostgreSQL"],
+        "expected_skills_missing": [],
+        "expected_experience_status": "EXCEEDS_REQUIREMENT",
+        "expected_education_status": "FULLY_ALIGNED",
+        "min_overall_score": 70.0,
+        "max_overall_score": 100.0,
+        "is_error_case": false
+      }
+    }
+  ]
+}

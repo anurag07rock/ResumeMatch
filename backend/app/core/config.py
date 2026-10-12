@@ -16,7 +16,9 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     BACKEND_URL: str = "http://localhost:8000"
     SECRET_KEY: str = Field(default="change-this-to-a-super-secret-high-entropy-key-in-production")
+    JWT_ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
     # Database Configuration
     DATABASE_PROFILE: str = Field(default="postgres_pgvector")
@@ -58,6 +60,12 @@ class Settings(BaseSettings):
 
     # CORS
     BACKEND_CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+
+    # Rate Limiting Configuration (per Phase 3 Task 6)
+    RATE_LIMITING_ENABLED: bool = True
+    AUTH_RATE_LIMIT: str = "5/minute"
+    AI_RATE_LIMIT: str = "10/minute"
+    DEFAULT_RATE_LIMIT: str = "60/minute"
 
     def get_database_url(self) -> str:
         """
