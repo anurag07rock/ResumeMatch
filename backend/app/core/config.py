@@ -52,10 +52,10 @@ class Settings(BaseSettings):
     MAX_PDF_SIZE_BYTES: int = 5 * 1024 * 1024  # 5 MB ceiling
     MAX_PDF_PAGES: int = 10                     # 10 pages ceiling
 
-    # Scoring Weights
-    WEIGHT_SKILLS: float = 0.40
-    WEIGHT_SEMANTIC: float = 0.35
-    WEIGHT_EXPERIENCE: float = 0.15
+    # Scoring Weights (Canonical Calibrations: Semantic 50%, Skills 30%, Experience 10%, Education 10%)
+    WEIGHT_SEMANTIC: float = 0.50
+    WEIGHT_SKILLS: float = 0.30
+    WEIGHT_EXPERIENCE: float = 0.10
     WEIGHT_EDUCATION: float = 0.10
 
     # CORS
