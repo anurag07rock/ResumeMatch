@@ -61,7 +61,7 @@ class MatchResponse(BaseModel):
                 "education_score": edu,
                 "final_score": ov,
                 "overall_score": ov,
-                "fit_category": bd.get("fit_category") or ("STRONG_MATCH" if ov >= 80 else ("MODERATE_MATCH" if ov >= 65 else "LOW_MATCH")),
+                "fit_category": bd.get("fit_category") or ("STRONG_MATCH" if ov >= 80 else ("MODERATE_MATCH" if ov >= 65 else ("LOW_MATCH" if ov >= 50 else "NO_MATCH"))),
                 "skills_breakdown": bd.get("skills_breakdown", {}),
                 "experience_breakdown": bd.get("experience_breakdown", {}),
                 "education_breakdown": bd.get("education_breakdown", {}),

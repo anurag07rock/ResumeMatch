@@ -21,8 +21,14 @@ from app.repositories.match_repository import MatchRepository
 
 from urllib.parse import urlparse
 import asyncio
+from pathlib import Path
 from alembic.config import Config
 from alembic import command
+
+# Repository root and Alembic configuration paths derived reliably from test file location
+REPO_ROOT = Path(__file__).resolve().parents[2]
+ALEMBIC_INI_PATH = REPO_ROOT / "alembic.ini"
+ALEMBIC_SCRIPT_DIR = REPO_ROOT / "backend" / "alembic"
 
 # Target PostgreSQL URL strictly for database integration tests
 TEST_POSTGRES_URL = settings.get_test_database_url()
@@ -81,7 +87,8 @@ async def _ensure_test_database_provisioned():
         await test_conn.close()
 
     # Apply Alembic migrations to test db
-    alembic_cfg = Config("alembic.ini")
+    alembic_cfg = Config(str(ALEMBIC_INI_PATH))
+    alembic_cfg.set_main_option("script_location", str(ALEMBIC_SCRIPT_DIR))
     alembic_cfg.set_main_option("sqlalchemy.url", TEST_POSTGRES_URL)
     await asyncio.to_thread(command.upgrade, alembic_cfg, "head")
 

@@ -229,3 +229,29 @@ class TestMatchSchemas:
                 education_breakdown={},
                 explanation={},
             )
+
+    def test_match_response_fit_category_orm_fallback(self):
+        class MockOrmMatch:
+            def __init__(self, overall_score: float):
+                self.id = uuid.uuid4()
+                self.overall_score = overall_score
+                self.semantic_score = overall_score
+                self.skills_score = overall_score
+                self.experience_score = overall_score
+                self.education_score = overall_score
+                self.breakdown = {}  # Empty breakdown triggers fallback
+                self.explanation = {}
+                self.created_at = datetime.now(UTC)
+
+        strong = MatchResponse.model_validate(MockOrmMatch(85.0))
+        assert strong.fit_category == "STRONG_MATCH"
+
+        moderate = MatchResponse.model_validate(MockOrmMatch(70.0))
+        assert moderate.fit_category == "MODERATE_MATCH"
+
+        low = MatchResponse.model_validate(MockOrmMatch(55.0))
+        assert low.fit_category == "LOW_MATCH"
+
+        no_match = MatchResponse.model_validate(MockOrmMatch(40.0))
+        assert no_match.fit_category == "NO_MATCH"
+
