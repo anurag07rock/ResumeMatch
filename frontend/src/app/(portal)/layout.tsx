@@ -21,21 +21,14 @@ export default function PortalLayout({
     }
   }, [isLoading, isAuthenticated, router, pathname]);
 
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen w-full items-center justify-center bg-slate-950 text-slate-300">
-        <LoadingSpinner size="lg" label="Verifying authenticated session..." />
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="flex min-h-screen w-full items-center justify-center bg-slate-950 text-slate-400">
-        <p className="text-sm">Redirecting to login...</p>
-      </div>
-    );
-  }
-
-  return <AppShell>{children}</AppShell>;
+  return (
+    <AppShell>
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-sm">
+          <LoadingSpinner size="lg" label="Verifying authenticated session..." />
+        </div>
+      )}
+      {children}
+    </AppShell>
+  );
 }
