@@ -110,6 +110,7 @@ scratch/
 *.pdf
 !data/evaluation/**/*.pdf
 !backend/tests/fixtures/**/*.pdf
+!frontend/tests/fixtures/**/*.pdf
 
 # --- AI/ML Model Caches & Large Weights ---
 models_cache/

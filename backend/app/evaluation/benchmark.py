@@ -26,6 +26,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+# Ensure backend directory is in sys.path when invoked directly
+backend_dir = str(Path(__file__).resolve().parents[2])
+if backend_dir not in sys.path:
+    sys.path.insert(0, backend_dir)
+
 import numpy as np
 from pydantic import BaseModel, Field
 

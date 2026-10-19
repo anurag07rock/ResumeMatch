@@ -1,0 +1,57 @@
+# Root .dockerignore
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.env
+*.pem
+*.key
+*.cert
+*.crt
+secrets.json
+credentials.json
+
+# Python virtual environments & bytecode
+venv/
+.venv/
+backend/venv/
+backend/.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Node.js & Next.js builds
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+.npm/
+
+# Testing & logs
+tests/
+test-results/
+playwright-report/
+blob-report/
+*.log
+
+# OS & Editor metadata
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+[Dd]esktop.ini
+
+# Temporary data & caches
+uploads/
+temp/
+tmp/
+scratch/
+models_cache/
+.cache/

@@ -2,7 +2,8 @@ from datetime import UTC, datetime, timedelta
 import uuid
 import pytest
 from fastapi import HTTPException
-from app.core.config import settings
+from pydantic import ValidationError
+from app.core.config import Settings, settings
 from app.core.dependencies import verify_tenant_ownership
 from app.core.security import (
     InvalidTokenError,
@@ -134,3 +135,114 @@ class TestTenantOwnership:
         with pytest.raises(HTTPException) as exc_info:
             verify_tenant_ownership(user2_id, user1)
         assert exc_info.value.status_code == 403
+
+
+class TestProductionConfigValidation:
+    """Tests production security validations, credential requirements, and CORS parsing."""
+
+    def test_development_defaults_allowed(self):
+        cfg = Settings(
+            ENVIRONMENT="development",
+            _env_file=None,
+        )
+        assert cfg.ENVIRONMENT == "development"
+        assert cfg.SECRET_KEY.startswith("change-this")
+        assert cfg.POSTGRES_PASSWORD == "resumematch_password"
+        assert "http://localhost:3000" in cfg.BACKEND_CORS_ORIGINS
+
+    def test_production_rejects_default_secret_key(self):
+        with pytest.raises(ValidationError, match="Insecure or default SECRET_KEY detected"):
+            Settings(
+                ENVIRONMENT="production",
+                SECRET_KEY="change-this-to-a-super-secret-high-entropy-key-in-production",
+                POSTGRES_PASSWORD="a-very-strong-production-db-password-1234",
+                _env_file=None,
+            )
+
+    def test_production_rejects_short_secret_key(self):
+        with pytest.raises(ValidationError, match="SECRET_KEY is too weak"):
+            Settings(
+                ENVIRONMENT="production",
+                SECRET_KEY="short-secret-key-too-brief",
+                POSTGRES_PASSWORD="a-very-strong-production-db-password-1234",
+                _env_file=None,
+            )
+
+    def test_production_rejects_default_postgres_password(self):
+        with pytest.raises(ValidationError, match="Insecure or default POSTGRES_PASSWORD detected"):
+            Settings(
+                ENVIRONMENT="production",
+                SECRET_KEY="a" * 32,
+                POSTGRES_PASSWORD="resumematch_password",
+                _env_file=None,
+            )
+
+    def test_production_rejects_insecure_database_url_password(self):
+        with pytest.raises(ValidationError, match="Insecure or placeholder database password in DATABASE_URL"):
+            Settings(
+                ENVIRONMENT="production",
+                SECRET_KEY="a" * 32,
+                DATABASE_URL="postgresql+asyncpg://prod_user:resumematch_password@db:5432/resumematch",
+                _env_file=None,
+            )
+
+    def test_production_rejects_sqlite_profile(self):
+        with pytest.raises(ValidationError, match="'local_sqlite' is not permitted in production"):
+            Settings(
+                ENVIRONMENT="production",
+                SECRET_KEY="a" * 32,
+                POSTGRES_PASSWORD="a-very-strong-production-db-password-1234",
+                DATABASE_PROFILE="local_sqlite",
+                _env_file=None,
+            )
+
+    def test_cors_rejects_wildcard(self):
+        with pytest.raises(ValidationError, match="Wildcard '\\*' in BACKEND_CORS_ORIGINS is strictly prohibited"):
+            Settings(
+                BACKEND_CORS_ORIGINS=["*"],
+                _env_file=None,
+            )
+
+    def test_cors_origin_parsing_from_comma_string(self):
+        cfg = Settings(
+            BACKEND_CORS_ORIGINS="https://app.resumematch.ai, https://admin.resumematch.ai",
+            _env_file=None,
+        )
+        assert cfg.BACKEND_CORS_ORIGINS == [
+            "https://app.resumematch.ai",
+            "https://admin.resumematch.ai",
+        ]
+
+    def test_cors_origin_parsing_from_json_string(self):
+        cfg = Settings(
+            BACKEND_CORS_ORIGINS='["https://app.resumematch.ai", "https://api.resumematch.ai"]',
+            _env_file=None,
+        )
+        assert cfg.BACKEND_CORS_ORIGINS == [
+            "https://app.resumematch.ai",
+            "https://api.resumematch.ai",
+        ]
+
+    def test_cors_rejects_origin_without_protocol(self):
+        with pytest.raises(ValidationError, match="Origins must include protocol"):
+            Settings(
+                BACKEND_CORS_ORIGINS=["app.resumematch.ai"],
+                _env_file=None,
+            )
+
+    def test_production_valid_configuration_accepted(self):
+        valid_secret = "k" * 32
+        cfg = Settings(
+            ENVIRONMENT="production",
+            SECRET_KEY=valid_secret,
+            POSTGRES_USER="prod_user",
+            POSTGRES_PASSWORD="custom_prod_db_pass_12345!",
+            BACKEND_CORS_ORIGINS=["https://app.resumematch.ai"],
+            _env_file=None,
+        )
+        assert cfg.ENVIRONMENT == "production"
+        assert cfg.SECRET_KEY == valid_secret
+        assert cfg.POSTGRES_PASSWORD == "custom_prod_db_pass_12345!"
+        assert cfg.BACKEND_CORS_ORIGINS == ["https://app.resumematch.ai"]
+        assert cfg.get_masked_url().startswith("postgresql+asyncpg://prod_user:***@")
+
